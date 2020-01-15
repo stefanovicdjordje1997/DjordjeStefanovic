@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Kalkulator</title>
+        <style>
+            .kalkulator {
+                margin: 0 auto;
+                padding: 30px;
+                width: 700px;
+                border: 2px solid black;
+                background-image: linear-gradient(green, yellow);
+                font-size: 24px;
+                margin-top: 100px;
+            }
+            .container {
+                display: flex;
+                justify-content: center;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="kalkulator">
+            <h2>JavaScript kalkulator</h2>
+            <form action="">
+                Prvi broj:<input type="text" class="prvi" />
+                <select>
+                    <option value="+">Sabiranje</option>
+                    <option value="-">Oduzimanje</option>
+                    <option value="*">Mnozenje</option>
+                    <option value="/">Deljenje</option>
+                </select>
+                Drugi broj:<input type="text" class="drugi" />
+                <br />
+                <div class="container">
+                    Resenje: <input type="text" class="resenje" disabled />
+                    <input type="submit" />
+                </div>
+            </form>
+        </div>
+
+        <script>
+            document.querySelector('form').addEventListener('submit', e => {
+                e.preventDefault();
+                try {
+                    var resenje = eval(
+                        `${document.querySelector('.prvi').value} ${
+                            document.querySelector('select').options[
+                                document.querySelector('select').selectedIndex
+                            ].value
+                        }
+                    ${document.querySelector('.drugi').value}
+                    `
+                    );
+                } catch (error) {
+                    document.querySelector('.resenje').value =
+                        'Lose unet broj!!';
+                }
+                if (resenje != undefined) {
+                    document.querySelector('.resenje').value = resenje;
+                }
+                document.querySelector('.prvi').value = '';
+                document.querySelector('.drugi').value = '';
+            });
+        </script>
+    </body>
+</html>
